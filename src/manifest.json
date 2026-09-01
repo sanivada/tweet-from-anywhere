@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+  "name": "Tweet From Anywhere",
+  "version": "1.1",
+  "description": "Publish tweets without opening Twitter.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "@tweet-from-anywhere",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+  "permissions": [
+    "tabs",
+    "https://twitter.com/*",
+    "https://x.com/*",
+    "activeTab"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icon.png"
+    }
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*", "https://x.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
