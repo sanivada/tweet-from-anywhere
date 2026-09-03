@@ -8,6 +8,18 @@
   });
 
   function publishTweet(text) {
+    // If compose modal isn't open yet, click the Compose button
+    const composeBtn = document.querySelector('[data-testid="SideNav_NewTweet_Button"]');
+    if (composeBtn && !document.querySelector('[aria-label="Post text"][contenteditable="true"], [data-testid="tweetTextarea_0"]')) {
+      composeBtn.click();
+      // Give modal time to open
+      setTimeout(() => injectAndSubmit(text), 2500);
+      return { success: true, note: 'compose button clicked, injecting after delay' };
+    }
+    return injectAndSubmit(text);
+  }
+
+  function injectAndSubmit(text) {
     // Find compose textarea by aria-label
     const textarea = document.querySelector('[aria-label="Post text"][contenteditable="true"], [data-testid="tweetTextarea_0"]');
 

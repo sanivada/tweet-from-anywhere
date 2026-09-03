@@ -6,7 +6,7 @@ browser.runtime.onMessage.addListener((message, sender) => {
 
 function handlePublish(text) {
   return browser.tabs.create({
-    url: 'https://twitter.com/compose/tweet',
+    url: 'https://x.com/explore',
     active: false
   }).then((tab) => {
     return new Promise((resolve) => {
